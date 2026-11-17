@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#c62828">
+  <title>Menu Lapangan | DioFid Arena</title>
+  <link rel="stylesheet" href="../assets/css/portal.css">
+  <script src="../assets/js/auth.js" defer></script>
+</head>
+<body data-page="user">
+  <header class="fields-header">
+    <a class="brand" href="index.html" aria-label="DioFid Arena, menu lapangan">
+      <span class="brand-mark" aria-hidden="true">D</span>
+      <span>DioFid Arena</span>
+    </a>
+    <div class="header-actions">
+      <span class="welcome-name">Halo, <strong data-session-name></strong></span>
+      <button class="logout-button" type="button" data-logout>Keluar</button>
+    </div>
+  </header>
+
+  <main class="fields-layout">
+    <section class="fields-heading">
+      <p class="eyebrow">Menu pelanggan</p>
+      <h1>Pilih lapangan favorit Anda</h1>
+      <p>Lihat pilihan lapangan DioFid Arena. Pilih lapangan untuk memulai proses pemesanan.</p>
+    </section>
+
+    <section class="fields-grid" aria-label="Daftar lapangan">
+      <article class="field-card">
+        <div class="field-visual" aria-hidden="true">
+          <svg viewBox="0 0 100 70"><rect x="8" y="8" width="84" height="54" rx="2"></rect><path d="M50 8v54M8 35h84M31 8a27 27 0 0 1 0 54M69 8a27 27 0 0 0 0 54"></path><circle cx="50" cy="35" r="8"></circle></svg>
+        </div>
+        <div class="field-card-content">
+          <h2>Futsal A</h2>
+          <p>Lapangan futsal rumput sintetis, cocok untuk pertandingan bersama teman.</p>
+          <div class="field-card-footer">
+            <div class="field-price">Rp 150.000<span>per jam</span></div>
+            <button class="book-button" type="button" data-book-field="Futsal A">Pilih</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="field-card">
+        <div class="field-visual" aria-hidden="true">
+          <svg viewBox="0 0 100 70"><rect x="8" y="8" width="84" height="54" rx="2"></rect><path d="M50 8v54M8 35h84M25 8v54M75 8v54M8 18h17M8 52h17M75 18h17M75 52h17"></path></svg>
+        </div>
+        <div class="field-card-content">
+          <h2>Badminton 1</h2>
+          <p>Lapangan indoor dengan pencahayaan nyaman untuk bermain kapan saja.</p>
+          <div class="field-card-footer">
+            <div class="field-price">Rp 80.000<span>per jam</span></div>
+            <button class="book-button" type="button" data-book-field="Badminton 1">Pilih</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="field-card">
+        <div class="field-visual" aria-hidden="true">
+          <svg viewBox="0 0 100 70"><rect x="8" y="8" width="84" height="54" rx="2"></rect><path d="M50 8v54M8 35h84M26 8v54M74 8v54M8 20h18M8 50h18M74 20h18M74 50h18"></path><circle cx="50" cy="35" r="8"></circle></svg>
+        </div>
+        <div class="field-card-content">
+          <h2>Basket Indoor</h2>
+          <p>Lapangan basket indoor dengan area bermain luas dan fasilitas penonton.</p>
+          <div class="field-card-footer">
+            <div class="field-price">Rp 200.000<span>per jam</span></div>
+            <button class="book-button" type="button" data-book-field="Basket Indoor">Pilih</button>
+          </div>
+        </div>
+      </article>
+    </section>
+    <p class="booking-message" id="booking-message" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>

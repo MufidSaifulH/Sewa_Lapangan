@@ -3,269 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#c62828">
-  <meta name="description" content="Temukan dan pilih lapangan olahraga favoritmu di DioFid Arena.">
-  <title>Pilih Lapangan | DioFid Arena</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#a91f1f">
+  <title>Masuk | DioFid Arena</title>
+  <link rel="stylesheet" href="assets/css/portal.css">
+  <script src="assets/js/auth.js" defer></script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#" aria-label="DioFid Arena, halaman utama">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 5h16v14H4z"></path>
-            <path d="M12 5v14M4 12h16M8 5a7 7 0 0 1 0 14M16 5a7 7 0 0 0 0 14"></path>
-          </svg>
-        </span>
+<body data-page="auth">
+  <main class="auth-layout">
+    <section class="brand-panel" aria-label="Tentang DioFid Arena">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">D</span>
         <span>DioFid Arena</span>
       </a>
-
-      <nav class="main-nav" aria-label="Navigasi utama">
-        <a class="nav-link active" href="#beranda" aria-current="page">Beranda</a>
-        <a class="nav-link" href="#lapangan">Pilih Lapangan</a>
-        <a class="nav-link" href="#cara-pesan">Cara Pesan</a>
-      </nav>
-
-      <a class="header-button" href="#lapangan">Cari Lapangan</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero" id="beranda">
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <span class="eyebrow"><span class="eyebrow-dot"></span> WAKTUNYA MAIN</span>
-          <h1>Temukan lapangan yang <span>pas untukmu.</span></h1>
-          <p>Futsal, badminton, atau basket? Pilih lapangan favoritmu dan siapkan permainan seru bersama teman-teman.</p>
-          <a class="primary-button" href="#lapangan">
-            Lihat Pilihan Lapangan
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-          </a>
-          <div class="hero-note">
-            <span class="hero-note-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"></path><path d="m9 12 2 2 4-4"></path></svg>
-            </span>
-            Lapangan terawat, siap untuk setiap pertandingan
-          </div>
-        </div>
-
-        <div class="hero-art" aria-hidden="true">
-          <div class="art-court">
-            <span class="art-center-line"></span>
-            <span class="art-center-circle"></span>
-            <span class="art-goal art-goal-left"></span>
-            <span class="art-goal art-goal-right"></span>
-            <span class="art-ball"></span>
-          </div>
-          <span class="art-label">MAIN BARENG, SERU BARENG</span>
-          <span class="art-decoration art-decoration-one"></span>
-          <span class="art-decoration art-decoration-two"></span>
-        </div>
+      <div class="brand-copy">
+        <p class="eyebrow">Sewa lapangan lebih mudah</p>
+        <h1>Waktunya bermain.</h1>
+        <p>Masuk untuk menemukan lapangan dan mengatur pemesanan Anda.</p>
       </div>
+      <p class="brand-caption">Portal penyewaan lapangan DioFid Arena</p>
     </section>
 
-    <section class="fields-section" id="lapangan" aria-labelledby="fields-title">
-      <div class="section-heading">
-        <div>
-          <span class="section-kicker">PILIH SESUKAMU</span>
-          <h2 id="fields-title">Lapangan pilihan</h2>
-          <p>Cari lapangan yang paling cocok untuk permainanmu.</p>
+    <section class="form-panel" aria-labelledby="form-title">
+      <div class="form-wrap">
+        <div class="form-heading">
+          <p class="eyebrow">Selamat datang</p>
+          <h2 id="form-title">Masuk ke akun</h2>
+          <p id="form-description">Gunakan email dan kata sandi akun Anda.</p>
         </div>
-        <span class="field-count"><strong>4</strong> lapangan tersedia</span>
-      </div>
 
-      <div class="field-tools">
-        <div class="filter-list" role="group" aria-label="Filter jenis lapangan">
-          <button class="filter-button active" type="button" data-filter="semua" aria-pressed="true">Semua</button>
-          <button class="filter-button" type="button" data-filter="futsal" aria-pressed="false">Futsal</button>
-          <button class="filter-button" type="button" data-filter="badminton" aria-pressed="false">Badminton</button>
-          <button class="filter-button" type="button" data-filter="basket" aria-pressed="false">Basket</button>
+        <div class="form-tabs" role="tablist" aria-label="Jenis formulir">
+          <button class="form-tab active" id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="login-form" data-mode="login">Masuk</button>
+          <button class="form-tab" id="register-tab" type="button" role="tab" aria-selected="false" aria-controls="register-form" data-mode="register">Daftar akun</button>
         </div>
-        <label class="search-box">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-          <span class="visually-hidden">Cari nama lapangan</span>
-          <input id="field-search" type="search" placeholder="Cari lapangan..." autocomplete="off">
-        </label>
-      </div>
 
-      <p class="selection-status" id="selection-status" aria-live="polite">Belum ada lapangan dipilih.</p>
+        <form id="login-form" class="auth-form">
+          <label for="login-email">Email</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" placeholder="nama@email.com" required>
+          <label for="login-password">Kata sandi</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi" required>
+          <button class="submit-button" type="submit">Masuk</button>
+        </form>
 
-      <div class="field-grid" id="field-grid">
-        <article class="field-card" data-category="futsal" data-search="futsal indoor a sintetis">
-          <div class="field-image court-futsal" aria-hidden="true">
-            <span class="court-badge">FUTSAL</span>
-            <span class="court-art court-art-futsal"><span></span></span>
-            <span class="image-caption">INDOOR</span>
-          </div>
-          <div class="field-info">
-            <div class="field-title-row">
-              <h3>Futsal Indoor A</h3>
-              <span class="rating"><span aria-hidden="true">★</span> 4.9</span>
-            </div>
-            <p class="field-location">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-              Lantai sintetis · 12 pemain
-            </p>
-            <div class="field-footer">
-              <p class="price">Rp 150.000 <span>/ jam</span></p>
-              <button class="choose-button" type="button" aria-pressed="false">Pilih Lapangan</button>
-            </div>
-          </div>
-        </article>
+        <form id="register-form" class="auth-form" hidden>
+          <label for="register-name">Nama lengkap</label>
+          <input id="register-name" name="name" type="text" autocomplete="name" placeholder="Nama Anda" required maxlength="80">
+          <label for="register-email">Email</label>
+          <input id="register-email" name="email" type="email" autocomplete="email" placeholder="nama@email.com" required>
+          <label for="register-password">Kata sandi</label>
+          <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="Minimal 8 karakter" minlength="8" required>
+          <button class="submit-button" type="submit">Buat akun</button>
+        </form>
 
-        <article class="field-card" data-category="badminton" data-search="badminton court 1 bulu tangkis">
-          <div class="field-image court-badminton" aria-hidden="true">
-            <span class="court-badge">BADMINTON</span>
-            <span class="court-art court-art-badminton"><span></span></span>
-            <span class="image-caption">INDOOR</span>
-          </div>
-          <div class="field-info">
-            <div class="field-title-row">
-              <h3>Badminton Court 1</h3>
-              <span class="rating"><span aria-hidden="true">★</span> 4.8</span>
-            </div>
-            <p class="field-location">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-              Lantai vinyl · 4 pemain
-            </p>
-            <div class="field-footer">
-              <p class="price">Rp 60.000 <span>/ jam</span></p>
-              <button class="choose-button" type="button" aria-pressed="false">Pilih Lapangan</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="field-card" data-category="basket" data-search="basket indoor court bola basket">
-          <div class="field-image court-basket" aria-hidden="true">
-            <span class="court-badge">BASKET</span>
-            <span class="court-art court-art-basket"><span></span></span>
-            <span class="image-caption">INDOOR</span>
-          </div>
-          <div class="field-info">
-            <div class="field-title-row">
-              <h3>Basket Indoor</h3>
-              <span class="rating"><span aria-hidden="true">★</span> 4.9</span>
-            </div>
-            <p class="field-location">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-              Lantai kayu · 10 pemain
-            </p>
-            <div class="field-footer">
-              <p class="price">Rp 200.000 <span>/ jam</span></p>
-              <button class="choose-button" type="button" aria-pressed="false">Pilih Lapangan</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="field-card" data-category="futsal" data-search="futsal outdoor b rumput sintetis">
-          <div class="field-image court-outdoor" aria-hidden="true">
-            <span class="court-badge">FUTSAL</span>
-            <span class="court-art court-art-outdoor"><span></span></span>
-            <span class="image-caption">OUTDOOR</span>
-          </div>
-          <div class="field-info">
-            <div class="field-title-row">
-              <h3>Futsal Outdoor B</h3>
-              <span class="rating"><span aria-hidden="true">★</span> 4.7</span>
-            </div>
-            <p class="field-location">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-              Rumput sintetis · 12 pemain
-            </p>
-            <div class="field-footer">
-              <p class="price">Rp 120.000 <span>/ jam</span></p>
-              <button class="choose-button" type="button" aria-pressed="false">Pilih Lapangan</button>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <p class="empty-state" id="empty-state" hidden>Tidak ada lapangan yang cocok. Coba ubah pencarianmu.</p>
-    </section>
-
-    <section class="how-to-section" id="cara-pesan">
-      <div class="how-to-inner">
-        <div>
-          <span class="section-kicker">MUDAH DAN PRAKTIS</span>
-          <h2>Siap mulai permainanmu?</h2>
-          <p>Pilih lapangan yang kamu suka, lalu lanjutkan untuk mengatur jadwal bermain.</p>
-        </div>
-        <a class="primary-button" href="#lapangan">
-          Pilih Lapangan
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-        </a>
+        <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        <p class="admin-hint">Masuk sebagai admin? Gunakan akun admin yang tercantum di README.</p>
       </div>
     </section>
   </main>
-
-  <footer class="site-footer" id="kontak">
-    <a class="footer-brand" href="#beranda">DioFid Arena</a>
-    <p>Tempat terbaik untuk bermain dan berolahraga bersama.</p>
-    <span>© 2026 DioFid Arena</span>
-  </footer>
-
-  <script>
-    const filterButtons = document.querySelectorAll(".filter-button");
-    const fieldCards = document.querySelectorAll(".field-card");
-    const searchInput = document.querySelector("#field-search");
-    const emptyState = document.querySelector("#empty-state");
-    const selectionStatus = document.querySelector("#selection-status");
-    let activeFilter = "semua";
-
-    function updateVisibleFields() {
-      const query = searchInput.value.trim().toLowerCase();
-      let visibleCount = 0;
-
-      fieldCards.forEach((card) => {
-        const matchesCategory = activeFilter === "semua" || card.dataset.category === activeFilter;
-        const matchesSearch = card.dataset.search.includes(query);
-        const isVisible = matchesCategory && matchesSearch;
-
-        card.hidden = !isVisible;
-        if (isVisible) visibleCount += 1;
-      });
-
-      emptyState.hidden = visibleCount > 0;
-    }
-
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        activeFilter = button.dataset.filter;
-        filterButtons.forEach((item) => {
-          const isActive = item === button;
-          item.classList.toggle("active", isActive);
-          item.setAttribute("aria-pressed", String(isActive));
-        });
-        updateVisibleFields();
-      });
-    });
-
-    searchInput.addEventListener("input", updateVisibleFields);
-
-    fieldCards.forEach((card) => {
-      const button = card.querySelector(".choose-button");
-      button.addEventListener("click", () => {
-        const wasSelected = button.getAttribute("aria-pressed") === "true";
-
-        fieldCards.forEach((item) => {
-          item.classList.remove("selected");
-          const itemButton = item.querySelector(".choose-button");
-          itemButton.setAttribute("aria-pressed", "false");
-          itemButton.textContent = "Pilih Lapangan";
-        });
-
-        if (wasSelected) {
-          selectionStatus.textContent = "Belum ada lapangan dipilih.";
-          return;
-        }
-
-        card.classList.add("selected");
-        button.setAttribute("aria-pressed", "true");
-        button.textContent = "Dipilih";
-        selectionStatus.textContent = `Lapangan pilihanmu: ${card.querySelector("h3").textContent}.`;
-      });
-    });
-  </script>
 </body>
 </html>

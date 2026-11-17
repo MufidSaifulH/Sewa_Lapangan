@@ -6,8 +6,10 @@
   <meta name="theme-color" content="#c62828">
   <title>Dashboard Admin | DioFid Arena</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../assets/css/portal.css">
+  <script src="../assets/js/auth.js" defer></script>
 </head>
-<body>
+<body data-page="admin">
   <div class="layout">
     <aside class="sidebar" aria-label="Navigasi admin">
       <a class="brand" href="#" aria-label="DioFid Arena, halaman utama admin">
@@ -66,9 +68,10 @@
         <div class="admin-profile">
           <span class="avatar" aria-hidden="true">AD</span>
           <div>
-            <p class="profile-name">Admin DioFid Arena</p>
+            <p class="profile-name" data-session-name>Admin DioFid Arena</p>
             <p class="profile-role">Administrator</p>
           </div>
+          <button class="logout-button" type="button" data-logout>Keluar</button>
         </div>
       </div>
     </aside>
