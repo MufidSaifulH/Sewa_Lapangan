@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#a91f1f">
+  <title>Masuk | DioFid Arena</title>
+  <link rel="stylesheet" href="assets/css/portal.css">
+  <script src="assets/js/auth.js" defer></script>
+</head>
+<body data-page="auth">
+  <main class="auth-layout">
+    <section class="brand-panel" aria-label="Tentang DioFid Arena">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>DioFid Arena</span>
+      </a>
+      <div class="brand-copy">
+        <p class="eyebrow">Sewa lapangan lebih mudah</p>
+        <h1>Waktunya bermain.</h1>
+        <p>Masuk untuk menemukan lapangan dan mengatur pemesanan Anda.</p>
+      </div>
+      <p class="brand-caption">Portal penyewaan lapangan DioFid Arena</p>
+    </section>
+
+    <section class="form-panel" aria-labelledby="form-title">
+      <div class="form-wrap">
+        <div class="form-heading">
+          <p class="eyebrow">Selamat datang</p>
+          <h2 id="form-title">Masuk ke akun</h2>
+          <p id="form-description">Gunakan email dan kata sandi akun Anda.</p>
+        </div>
+
+        <div class="form-tabs" role="tablist" aria-label="Jenis formulir">
+          <button class="form-tab active" id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="login-form" data-mode="login">Masuk</button>
+          <button class="form-tab" id="register-tab" type="button" role="tab" aria-selected="false" aria-controls="register-form" data-mode="register">Daftar akun</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <label for="login-email">Email</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" placeholder="nama@email.com" required>
+          <label for="login-password">Kata sandi</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi" required>
+          <button class="submit-button" type="submit">Masuk</button>
+        </form>
+
+        <form id="register-form" class="auth-form" hidden>
+          <label for="register-name">Nama lengkap</label>
+          <input id="register-name" name="name" type="text" autocomplete="name" placeholder="Nama Anda" required maxlength="80">
+          <label for="register-email">Email</label>
+          <input id="register-email" name="email" type="email" autocomplete="email" placeholder="nama@email.com" required>
+          <label for="register-password">Kata sandi</label>
+          <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="Minimal 8 karakter" minlength="8" required>
+          <button class="submit-button" type="submit">Buat akun</button>
+        </form>
+
+        <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        <p class="admin-hint">Masuk sebagai admin? Gunakan akun admin yang tercantum di README.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

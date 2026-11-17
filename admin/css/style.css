@@ -169,6 +169,17 @@
       font-size: 12px;
     }
 
+    .admin-profile .logout-button {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: white;
+      color: var(--ink);
+      padding: 0 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
     .main {
       min-height: 100vh;
       margin-left: 0;
