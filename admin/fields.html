@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#c62828">
+  <title>Kelola Lapangan | DioFid Arena</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../assets/css/portal.css">
+  <script src="js/layout.js" defer></script>
+  <script src="../assets/js/auth.js" defer></script>
+  <script src="../assets/js/fields.js" defer></script>
+</head>
+<body data-page="admin" data-admin-page="fields">
+  <div class="layout">
+    <aside class="sidebar" data-admin-sidebar aria-label="Navigasi admin"></aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="breadcrumb">Menu utama <span aria-hidden="true">/</span> <strong data-admin-current-title>Lapangan</strong></div>
+        <div class="topbar-right">
+          <span class="today" data-admin-today></span>
+          <span class="notification" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"></path></svg>
+          </span>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="page-heading" aria-labelledby="field-management-title">
+          <div>
+            <h1 id="field-management-title" data-admin-page-title>Kelola Lapangan</h1>
+            <p>Tambahkan dan atur informasi lapangan yang tersedia untuk pelanggan.</p>
+          </div>
+        </section>
+
+        <section class="panel field-management" aria-labelledby="field-form-title">
+          <div class="panel-heading">
+            <div>
+              <h2 id="field-form-title">Informasi Lapangan</h2>
+              <p>Isi detail lapangan baru atau pilih lapangan untuk mengubah datanya.</p>
+            </div>
+          </div>
+
+          <form id="field-form" class="field-form">
+            <input name="id" type="hidden">
+            <label>
+              Nama lapangan
+              <input name="name" type="text" maxlength="80" placeholder="Contoh: Futsal A" required>
+            </label>
+            <label>
+              Jenis olahraga
+              <select name="sport" required>
+                <option value="">Pilih olahraga</option>
+                <option>Futsal</option>
+                <option>Badminton</option>
+                <option>Basket</option>
+                <option>Sepak bola</option>
+                <option>Voli</option>
+                <option>Tenis</option>
+                <option>Lainnya</option>
+              </select>
+            </label>
+            <label>
+              Jenis / permukaan lapangan
+              <input name="type" type="text" maxlength="80" placeholder="Contoh: Indoor, rumput sintetis" required>
+            </label>
+            <label>
+              Harga per jam (Rp)
+              <input name="price" type="number" min="1" step="1" placeholder="150000" required>
+            </label>
+            <label>
+              Jam buka
+              <input name="openTime" type="time" required>
+            </label>
+            <label>
+              Jam tutup
+              <input name="closeTime" type="time" required>
+            </label>
+            <label>
+              Foto lapangan
+              <input name="photo" type="file" accept="image/*">
+              <span class="field-input-hint">Opsional, format gambar maksimal 1 MB.</span>
+            </label>
+            <label class="field-description">
+              Keterangan
+              <textarea name="description" rows="3" maxlength="300" placeholder="Jelaskan fasilitas atau informasi lapangan." required></textarea>
+            </label>
+            <label class="field-status-input">
+              Status
+              <select name="active">
+                <option value="true">Aktif — tampil untuk pelanggan</option>
+                <option value="false">Nonaktif — disembunyikan</option>
+              </select>
+            </label>
+            <div class="field-form-actions">
+              <button class="primary-button" type="submit">Simpan Lapangan</button>
+              <button class="secondary-button" type="button" data-field-cancel hidden>Batal</button>
+            </div>
+            <p class="field-form-message" id="field-form-message" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="admin-field-list" id="admin-field-list" aria-live="polite"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

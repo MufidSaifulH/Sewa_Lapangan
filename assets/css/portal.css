@@ -375,6 +375,230 @@ input {
   cursor: pointer;
 }
 
+.field-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.field-visual-label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.field-card .field-card-details {
+  min-height: 0;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.fields-empty {
+  color: var(--muted);
+  margin: 22px 0;
+  text-align: center;
+}
+
+.page-notice {
+  max-width: 760px;
+}
+
+.page-notice h2 {
+  margin: 0 0 10px;
+  font-size: 17px;
+}
+
+.page-notice p,
+.page-message {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.page-notice p {
+  margin: 0 0 14px;
+}
+
+.page-message {
+  margin: 16px 21px;
+}
+
+.field-management {
+  margin-bottom: 22px;
+}
+
+.field-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 22px;
+}
+
+.field-form label {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.field-form input,
+.field-form select,
+.field-form textarea {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid #dedede;
+  border-radius: 7px;
+  background: white;
+  color: var(--ink);
+  padding: 9px 10px;
+  font: inherit;
+  font-size: 13px;
+}
+
+.field-form input[type="file"] {
+  padding: 7px;
+}
+
+.field-form textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.field-form input:focus,
+.field-form select:focus,
+.field-form textarea:focus {
+  border-color: var(--red);
+  outline: 2px solid rgb(198 40 40 / 12%);
+}
+
+.field-input-hint {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.field-description {
+  grid-column: span 2;
+}
+
+.field-status-input {
+  grid-column: 1 / 2;
+}
+
+.field-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.secondary-button {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: white;
+  color: var(--ink);
+  padding: 0 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: #f7f7f7;
+}
+
+.delete-button {
+  color: var(--red);
+}
+
+.field-form-message {
+  grid-column: 1 / -1;
+  min-height: 18px;
+  margin: 0;
+  color: var(--green);
+  font-size: 12px;
+}
+
+.field-form-message.is-error {
+  color: var(--red);
+}
+
+.admin-field-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding-top: 20px;
+}
+
+.admin-field-card {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.admin-field-card .field-visual {
+  min-height: 100%;
+}
+
+.admin-field-content {
+  min-width: 0;
+  padding: 12px;
+}
+
+.admin-field-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.admin-field-title h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.admin-field-content p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.admin-field-content .admin-field-description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.field-status {
+  flex: 0 0 auto;
+  border-radius: 20px;
+  background: #f1f1f1;
+  color: #666;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.field-status.is-active {
+  background: #eaf7ef;
+  color: #23834b;
+}
+
+.admin-field-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.admin-field-actions .secondary-button {
+  min-height: 31px;
+  font-size: 11px;
+}
+
 .booking-message {
   min-height: 20px;
   color: var(--green);
@@ -417,6 +641,14 @@ html:not(.authorized) body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .field-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-field-list {
+    grid-template-columns: 1fr;
+  }
+
   .fields-header {
     padding-right: 20px;
     padding-left: 20px;
@@ -453,5 +685,19 @@ html:not(.authorized) body {
 
   .fields-grid {
     grid-template-columns: 1fr;
+  }
+
+  .field-form {
+    grid-template-columns: 1fr;
+  }
+
+  .field-description,
+  .field-status-input,
+  .field-form-message {
+    grid-column: 1;
+  }
+
+  .admin-field-card {
+    grid-template-columns: 100px minmax(0, 1fr);
   }
 }
