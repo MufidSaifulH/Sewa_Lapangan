@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="../assets/css/portal.css">
   <script src="js/layout.js" defer></script>
   <script src="../assets/js/auth.js" defer></script>
+  <script src="../assets/js/booking-store.js" defer></script>
+  <script src="js/bookings.js" defer></script>
 </head>
 <body data-page="admin" data-admin-page="bookings">
   <div class="layout">
@@ -36,7 +38,7 @@
           <div class="panel-heading">
             <div>
               <h2 id="booking-title">Pemesanan Terbaru</h2>
-              <p>Data contoh; sistem pemesanan belum terhubung ke penyimpanan.</p>
+              <p>Semua pemesanan pelanggan dan status transaksinya tersimpan di browser ini.</p>
             </div>
           </div>
           <div class="table-wrap">
@@ -44,44 +46,17 @@
               <thead>
                 <tr>
                   <th scope="col">Pelanggan</th>
+                  <th scope="col">Email</th>
                   <th scope="col">Lapangan</th>
                   <th scope="col">Tanggal &amp; Waktu</th>
                   <th scope="col">Total</th>
                   <th scope="col">Status</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td><span class="customer-cell"><span class="customer-avatar" aria-hidden="true">AR</span>Andi Ramadhan</span></td>
-                  <td>Futsal A</td>
-                  <td>15 Nov 2026, 14.00</td>
-                  <td>Rp 150.000</td>
-                  <td><span class="status confirmed">Terkonfirmasi</span></td>
-                </tr>
-                <tr>
-                  <td><span class="customer-cell"><span class="customer-avatar" aria-hidden="true">SP</span>Siti Permata</span></td>
-                  <td>Badminton 1</td>
-                  <td>15 Nov 2026, 16.00</td>
-                  <td>Rp 80.000</td>
-                  <td><span class="status waiting">Menunggu</span></td>
-                </tr>
-                <tr>
-                  <td><span class="customer-cell"><span class="customer-avatar" aria-hidden="true">BF</span>Budi Firmansyah</span></td>
-                  <td>Basket Indoor</td>
-                  <td>15 Nov 2026, 19.00</td>
-                  <td>Rp 200.000</td>
-                  <td><span class="status confirmed">Terkonfirmasi</span></td>
-                </tr>
-                <tr>
-                  <td><span class="customer-cell"><span class="customer-avatar" aria-hidden="true">DN</span>Dewi Nurhaliza</span></td>
-                  <td>Futsal B</td>
-                  <td>16 Nov 2026, 10.00</td>
-                  <td>Rp 150.000</td>
-                  <td><span class="status cancelled">Dibatalkan</span></td>
-                </tr>
-              </tbody>
+              <tbody id="booking-list"></tbody>
             </table>
           </div>
+          <p class="page-message" id="booking-message" role="status" aria-live="polite"></p>
         </section>
       </div>
     </main>

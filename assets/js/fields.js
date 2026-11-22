@@ -118,11 +118,7 @@
       price.append(createElement("span", "", "per jam"));
       const button = createElement("button", "book-button", "Pilih");
       button.type = "button";
-      button.dataset.bookField = field.name;
-      button.addEventListener("click", () => {
-        const output = document.getElementById("booking-message");
-        output.textContent = `${field.name} dipilih. Fitur pemesanan akan tersedia setelah sistem booking terhubung.`;
-      });
+      button.dataset.bookField = field.id;
       footer.append(price, button);
       content.append(footer);
       card.append(content);
@@ -253,9 +249,15 @@
       const price = Number(data.get("price"));
       const existing = fields.find((field) => field.id === id);
       const photoFile = form.elements.photo.files[0];
+      const openTime = String(data.get("openTime"));
+      const closeTime = String(data.get("closeTime"));
 
       if (!Number.isFinite(price) || price <= 0) {
         showFormMessage("Harga harus lebih besar dari 0.", true);
+        return;
+      }
+      if (!/^\d{2}:\d{2}$/.test(openTime) || !/^\d{2}:\d{2}$/.test(closeTime) || closeTime <= openTime) {
+        showFormMessage("Jam tutup harus setelah jam buka.", true);
         return;
       }
       if (fields.some((field) => field.id !== id && field.name.toLocaleLowerCase("id-ID") === name.toLocaleLowerCase("id-ID"))) {
@@ -279,8 +281,8 @@
           sport,
           type,
           price,
-          openTime: String(data.get("openTime")),
-          closeTime: String(data.get("closeTime")),
+          openTime,
+          closeTime,
           description: String(data.get("description") || "").trim(),
           photo,
           active: data.get("active") === "true"
