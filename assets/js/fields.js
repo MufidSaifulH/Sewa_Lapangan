@@ -7,6 +7,7 @@
       name: "Futsal A",
       sport: "Futsal",
       type: "Indoor, rumput sintetis",
+      facilities: "Bola futsal, ruang ganti, toilet",
       price: 150000,
       openTime: "08:00",
       closeTime: "22:00",
@@ -19,6 +20,7 @@
       name: "Badminton 1",
       sport: "Badminton",
       type: "Indoor, lantai vinyl",
+      facilities: "Raket dan shuttlecock, ruang tunggu, toilet",
       price: 80000,
       openTime: "08:00",
       closeTime: "22:00",
@@ -31,6 +33,7 @@
       name: "Basket Indoor",
       sport: "Basket",
       type: "Indoor, lantai kayu",
+      facilities: "Bola basket, ruang ganti, toilet",
       price: 200000,
       openTime: "08:00",
       closeTime: "22:00",
@@ -47,6 +50,7 @@
     typeof field.name === "string" &&
     typeof field.sport === "string" &&
     typeof field.type === "string" &&
+    (field.facilities === undefined || typeof field.facilities === "string") &&
     Number.isFinite(field.price) &&
     typeof field.openTime === "string" &&
     typeof field.closeTime === "string" &&
@@ -65,7 +69,10 @@
     if (!Array.isArray(fields) || !fields.every(isField)) {
       throw new Error("Data lapangan tidak valid. Periksa penyimpanan browser Anda.");
     }
-    return fields;
+    return fields.map((field) => ({
+      ...field,
+      facilities: typeof field.facilities === "string" ? field.facilities : ""
+    }));
   };
 
   const formatPrice = (price) => `Rp ${new Intl.NumberFormat("id-ID").format(price)}`;
@@ -99,27 +106,19 @@
     const activeFields = fields.filter((field) => field.active);
     list.replaceChildren();
     activeFields.forEach((field) => {
-      const card = createElement("article", "field-card");
+      const card = createElement("a", "field-card");
+      card.href = `detail.html?id=${encodeURIComponent(field.id)}`;
       card.append(createVisual(field));
 
       const content = createElement("div", "field-card-content");
       content.append(createElement("h2", "", field.name));
-      content.append(createElement("p", "", field.description));
-
-      const details = createElement(
-        "p",
-        "field-card-details",
-        `${field.sport} · ${field.type} · ${field.openTime}–${field.closeTime}`
-      );
-      content.append(details);
+      content.append(createElement("p", "field-card-details", `${field.sport} · ${field.type}`));
+      content.append(createElement("p", "field-card-description", field.description));
 
       const footer = createElement("div", "field-card-footer");
       const price = createElement("div", "field-price", formatPrice(field.price));
       price.append(createElement("span", "", "per jam"));
-      const button = createElement("button", "book-button", "Pilih");
-      button.type = "button";
-      button.dataset.bookField = field.id;
-      footer.append(price, button);
+      footer.append(price, createElement("span", "field-detail-link", "Lihat detail →"));
       content.append(footer);
       card.append(content);
       list.append(card);
@@ -213,6 +212,7 @@
       form.elements.name.value = field.name;
       form.elements.sport.value = field.sport;
       form.elements.type.value = field.type;
+      form.elements.facilities.value = field.facilities;
       form.elements.price.value = String(field.price);
       form.elements.openTime.value = field.openTime;
       form.elements.closeTime.value = field.closeTime;
@@ -280,6 +280,7 @@
           name,
           sport,
           type,
+          facilities: String(data.get("facilities") || "").trim(),
           price,
           openTime,
           closeTime,
@@ -302,6 +303,8 @@
 
     return fields;
   };
+
+  window.DioFidFields = { loadFields };
 
   document.addEventListener("DOMContentLoaded", () => {
     try {

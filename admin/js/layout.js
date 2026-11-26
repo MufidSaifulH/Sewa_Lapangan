@@ -51,12 +51,7 @@
 
   sidebar.innerHTML = `
     <a class="brand" href="index.html" aria-label="DioFid Arena, halaman admin">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 5h16v14H4z"></path>
-          <path d="M12 5v14M4 12h16M8 5a7 7 0 0 1 0 14M16 5a7 7 0 0 0 0 14"></path>
-        </svg>
-      </span>
+      <img class="brand-mark" src="../assets/logo.svg" alt="">
       <span>DioFid Arena</span>
     </a>
     <p class="nav-label">Menu utama</p>

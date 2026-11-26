@@ -5,18 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#c62828">
   <title>Menu Lapangan | DioFid Arena</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
   <link rel="stylesheet" href="../assets/css/portal.css">
   <script src="../assets/js/auth.js" defer></script>
-  <script src="../assets/js/booking-store.js" defer></script>
   <script src="../assets/js/fields.js" defer></script>
-  <script src="../assets/js/booking.js" defer></script>
 </head>
 <body data-page="user">
   <header class="fields-header">
     <a class="brand" href="index.html" aria-label="DioFid Arena, menu lapangan">
-      <span class="brand-mark" aria-hidden="true">D</span>
+      <img class="brand-mark" src="../assets/logo.svg" alt="">
       <span>DioFid Arena</span>
     </a>
+    <nav class="user-nav" aria-label="Menu pelanggan">
+      <a href="index.html" aria-current="page">Pilih Lapangan</a>
+      <a href="cara-pesan.html">Cara Pesan</a>
+    </nav>
     <div class="header-actions">
       <span class="welcome-name">Halo, <strong data-session-name></strong></span>
       <button class="logout-button" type="button" data-logout>Keluar</button>
@@ -27,12 +30,11 @@
     <section class="fields-heading">
       <p class="eyebrow">Menu pelanggan</p>
       <h1>Pilih lapangan favorit Anda</h1>
-      <p>Lihat pilihan lapangan DioFid Arena. Pilih lapangan untuk memulai proses pemesanan.</p>
+      <p>Lihat detail lapangan dan pilih jadwal yang tersedia untuk memulai pemesanan.</p>
     </section>
 
     <section class="fields-grid" id="user-field-list" aria-label="Daftar lapangan"></section>
     <p class="fields-empty" id="fields-empty" hidden>Belum ada lapangan aktif. Silakan cek kembali nanti.</p>
-    <p class="booking-message" id="booking-message" role="status" aria-live="polite"></p>
   </main>
 </body>
 </html>

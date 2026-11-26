@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#c62828">
+  <title>Detail Lapangan | DioFid Arena</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+  <link rel="stylesheet" href="../assets/css/portal.css">
+  <script src="../assets/js/auth.js" defer></script>
+  <script src="../assets/js/booking-store.js" defer></script>
+  <script src="../assets/js/fields.js" defer></script>
+  <script src="js/booking.js" defer></script>
+</head>
+<body data-page="user">
+  <header class="fields-header">
+    <a class="brand" href="index.html" aria-label="DioFid Arena, menu pelanggan">
+      <img class="brand-mark" src="../assets/logo.svg" alt="">
+      <span>DioFid Arena</span>
+    </a>
+    <nav class="user-nav" aria-label="Menu pelanggan">
+      <a href="index.html">Pilih Lapangan</a>
+      <a href="cara-pesan.html">Cara Pesan</a>
+    </nav>
+    <div class="header-actions">
+      <span class="welcome-name">Halo, <strong data-session-name></strong></span>
+      <button class="logout-button" type="button" data-logout>Keluar</button>
+    </div>
+  </header>
+
+  <main class="fields-layout">
+    <a class="portal-back-link" href="index.html">← Kembali ke daftar lapangan</a>
+    <p class="portal-message is-error" id="detail-error" role="status" hidden></p>
+    <div class="field-detail-layout" id="detail-content" hidden>
+      <section class="field-detail-panel" aria-labelledby="detail-title">
+        <div class="field-visual field-detail-visual" aria-hidden="true">
+          <span class="field-visual-label" id="detail-sport-visual"></span>
+        </div>
+        <div class="field-detail-content">
+          <p class="eyebrow">DETAIL LAPANGAN</p>
+          <h1 id="detail-title"></h1>
+          <p class="field-card-details" id="detail-type"></p>
+          <dl class="field-detail-list">
+            <div><dt>Jenis olahraga</dt><dd id="detail-sport"></dd></div>
+            <div><dt>Deskripsi</dt><dd id="detail-description"></dd></div>
+            <div><dt>Fasilitas</dt><dd id="detail-facilities"></dd></div>
+            <div><dt>Jam operasional</dt><dd id="detail-hours"></dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="field-booking-panel" aria-labelledby="booking-title">
+        <p class="eyebrow">PESAN SEKARANG</p>
+        <h2 id="booking-title">Atur jadwal bermain</h2>
+        <p class="field-detail-price" id="detail-price"></p>
+        <form class="booking-form" id="booking-form">
+          <label for="booking-date">Tanggal sewa</label>
+          <input id="booking-date" name="date" type="date" required>
+
+          <label for="booking-time">Jam tersedia (durasi 1 jam)</label>
+          <select id="booking-time" name="time" required></select>
+
+          <button class="book-button" type="submit">Kirim pemesanan</button>
+          <p class="booking-form-message" id="booking-message" role="status" aria-live="polite"></p>
+        </form>
+        <p class="booking-help">Pemesanan akan berstatus menunggu konfirmasi admin.</p>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
