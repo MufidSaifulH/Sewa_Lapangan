@@ -30,12 +30,6 @@
       href: "reports.html",
       icon: '<path d="M4 19V5M4 19h17"></path><path d="m7 15 4-4 3 2 6-7"></path>'
     },
-    {
-      id: "settings",
-      label: "Pengaturan",
-      href: "settings.html",
-      icon: '<circle cx="12" cy="12" r="3"></circle><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.8-.6a8 8 0 0 1-1.6.9l-.3 1.9h-2.8l-.3-1.9a8 8 0 0 1-1.6-.9l-1.8.6-1.4-2.4 1.5-1.2a7 7 0 0 1 0-1.8l-1.5-1.2 1.4-2.4 1.8.6a8 8 0 0 1 1.6-.9l.3-1.9h2.8l.3 1.9a8 8 0 0 1 1.6.9l1.8-.6 1.4 2.4-1.5 1.2a7 7 0 0 1 0 1.8Z"></path>'
-    }
   ];
 
   const sidebar = document.querySelector("[data-admin-sidebar]");

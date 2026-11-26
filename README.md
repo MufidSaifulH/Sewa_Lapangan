@@ -7,7 +7,7 @@ Tugas Project PPW_2
 - Pendaftaran membuat akun dengan role `user`; setelah login, user diarahkan ke menu lapangan.
 - Akun demo admin: `admin@diofidarena.com` / `Admin123!`.
 - Keluar menggunakan tombol **Keluar** di halaman masing-masing role.
-- Menu admin berpindah ke halaman terpisah: Dashboard, Lapangan, Pemesanan, Pelanggan, Laporan, dan Pengaturan. Dashboard dan menu Pemesanan menampilkan transaksi dari pemesanan pelanggan; admin dapat mengubah status transaksi.
+- Menu admin berpindah ke halaman terpisah: Dashboard, Lapangan, Pemesanan, Pelanggan, dan Laporan. Dashboard dan menu Pemesanan menampilkan transaksi dari pemesanan pelanggan; admin dapat mengubah status transaksi.
 - Admin dapat menambah, mengubah, menonaktifkan, dan menghapus lapangan dari bagian **Kelola Lapangan**. Informasi yang dikelola meliputi nama, olahraga, jenis/permukaan, harga per jam, jam operasional, foto, dan keterangan.
 - Lapangan aktif ditampilkan pada menu pelanggan. Pelanggan dapat memilih tanggal dan slot satu jam dalam jam operasional; slot yang sudah dipesan tidak dapat dipilih. Pemesanan baru masuk dengan status menunggu konfirmasi admin. Foto lapangan opsional dan dibatasi maksimal 1 MB.
 
