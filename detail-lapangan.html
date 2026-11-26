@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#c62828">
+  <meta name="description" content="Detail dan formulir pemesanan lapangan DioFid Arena.">
+  <title>Detail Lapangan | DioFid Arena</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="DioFid Arena, halaman utama">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"></path><path d="M12 5v14M4 12h16M8 5a7 7 0 0 1 0 14M16 5a7 7 0 0 0 0 14"></path></svg>
+        </span>
+        <span>DioFid Arena</span>
+      </a>
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a class="nav-link" href="index.html">Beranda</a>
+        <a class="nav-link active" href="lapangan.html" aria-current="page">Pilih Lapangan</a>
+        <a class="nav-link" href="cara-pesan.html">Cara Pesan</a>
+      </nav>
+      <a class="header-button" href="lapangan.html">Daftar Lapangan</a>
+    </div>
+  </header>
+
+  <main class="page-section">
+    <a class="back-link" href="lapangan.html">← Kembali ke daftar lapangan</a>
+    <p class="detail-error" id="detail-error" role="status" hidden>Lapangan tidak ditemukan. Silakan pilih lapangan dari daftar.</p>
+    <div class="detail-layout" id="detail-content" hidden>
+      <section class="detail-panel" aria-labelledby="detail-title">
+        <div class="field-image detail-image" id="detail-image" aria-hidden="true">
+          <span class="court-badge" id="detail-category"></span>
+          <span class="court-art" id="detail-court-art"><span></span></span>
+          <span class="image-caption" id="detail-indoor"></span>
+        </div>
+        <div class="detail-copy">
+          <span class="section-kicker">DETAIL LAPANGAN</span>
+          <h1 id="detail-title"></h1>
+          <p class="field-location" id="detail-location"></p>
+          <dl class="field-details">
+            <div><dt>Jenis olahraga</dt><dd id="detail-sport"></dd></div>
+            <div><dt>Deskripsi</dt><dd id="detail-description"></dd></div>
+            <div><dt>Fasilitas</dt><dd><ul id="detail-facilities"></ul></dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="booking-panel" aria-labelledby="booking-title">
+        <span class="section-kicker">PESAN SEKARANG</span>
+        <h2 id="booking-title">Atur jadwal bermain</h2>
+        <p class="booking-price" id="booking-price"></p>
+        <form id="booking-form">
+          <label for="customer-name">Nama pemesan</label>
+          <input id="customer-name" name="name" type="text" autocomplete="name" required>
+
+          <label for="customer-phone">Nomor WhatsApp</label>
+          <input id="customer-phone" name="phone" type="tel" autocomplete="tel" required>
+
+          <label for="booking-date">Tanggal bermain</label>
+          <input id="booking-date" name="date" type="date" required>
+
+          <label for="booking-time">Jam mulai</label>
+          <input id="booking-time" name="time" type="time" required>
+
+          <label for="booking-duration">Durasi sewa</label>
+          <select id="booking-duration" name="duration">
+            <option value="1">1 jam</option>
+            <option value="2">2 jam</option>
+            <option value="3">3 jam</option>
+            <option value="4">4 jam</option>
+          </select>
+
+          <p class="booking-total">Estimasi total <strong id="booking-total"></strong></p>
+          <button class="primary-button booking-submit" type="submit">Simpan Pesanan</button>
+        </form>
+        <p class="booking-notice">Pesanan disimpan sebagai draf di browser ini dan belum dikirim atau dikonfirmasi oleh pengelola.</p>
+        <p class="booking-status" id="booking-status" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="index.html">DioFid Arena</a>
+    <p>Tempat terbaik untuk bermain dan berolahraga bersama.</p>
+    <span>© 2026 DioFid Arena</span>
+  </footer>
+
+  <script>
+    const fields = {
+      "futsal-indoor-a": {
+        name: "Futsal Indoor A",
+        sport: "Futsal",
+        category: "FUTSAL",
+        surface: "Lantai sintetis · 12 pemain",
+        description: "Lapangan futsal indoor dengan lantai sintetis yang nyaman untuk pertandingan bersama teman atau latihan rutin.",
+        facilities: ["Ruang ganti", "Area parkir", "Bola futsal", "Toilet"],
+        price: 150000,
+        image: "court-futsal",
+        court: "court-art-futsal",
+        indoor: "INDOOR"
+      },
+      "badminton-court-1": {
+        name: "Badminton Court 1",
+        sport: "Badminton",
+        category: "BADMINTON",
+        surface: "Lantai vinyl · 4 pemain",
+        description: "Lapangan badminton indoor dengan lantai vinyl untuk permainan yang nyaman dan aman.",
+        facilities: ["Raket dan shuttlecock", "Ruang tunggu", "Area parkir", "Toilet"],
+        price: 60000,
+        image: "court-badminton",
+        court: "court-art-badminton",
+        indoor: "INDOOR"
+      },
+      "basket-indoor": {
+        name: "Basket Indoor",
+        sport: "Basket",
+        category: "BASKET",
+        surface: "Lantai kayu · 10 pemain",
+        description: "Lapangan basket indoor berlantai kayu, cocok untuk latihan maupun pertandingan bersama.",
+        facilities: ["Bola basket", "Ruang ganti", "Area parkir", "Toilet"],
+        price: 200000,
+        image: "court-basket",
+        court: "court-art-basket",
+        indoor: "INDOOR"
+      },
+      "futsal-outdoor-b": {
+        name: "Futsal Outdoor B",
+        sport: "Futsal",
+        category: "FUTSAL",
+        surface: "Rumput sintetis · 12 pemain",
+        description: "Lapangan futsal outdoor dengan rumput sintetis yang luas untuk permainan yang lebih leluasa.",
+        facilities: ["Bola futsal", "Area parkir", "Toilet", "Tempat duduk penonton"],
+        price: 120000,
+        image: "court-outdoor",
+        court: "court-art-outdoor",
+        indoor: "OUTDOOR"
+      }
+    };
+
+    const fieldId = new URLSearchParams(window.location.search).get("id");
+    const field = Object.prototype.hasOwnProperty.call(fields, fieldId) ? fields[fieldId] : null;
+    const detailContent = document.querySelector("#detail-content");
+    const detailError = document.querySelector("#detail-error");
+    const bookingForm = document.querySelector("#booking-form");
+    const durationInput = document.querySelector("#booking-duration");
+    const dateInput = document.querySelector("#booking-date");
+    const money = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 });
+
+    if (!field) {
+      detailError.hidden = false;
+    } else {
+      detailContent.hidden = false;
+      document.title = `${field.name} | DioFid Arena`;
+      document.querySelector("#detail-image").classList.add(field.image);
+      document.querySelector("#detail-court-art").classList.add(field.court);
+      document.querySelector("#detail-category").textContent = field.category;
+      document.querySelector("#detail-indoor").textContent = field.indoor;
+      document.querySelector("#detail-title").textContent = field.name;
+      document.querySelector("#detail-location").textContent = field.surface;
+      document.querySelector("#detail-sport").textContent = field.sport;
+      document.querySelector("#detail-description").textContent = field.description;
+      document.querySelector("#booking-price").textContent = `${money.format(field.price)} / jam`;
+      document.querySelector("#detail-facilities").replaceChildren(...field.facilities.map((facility) => {
+        const item = document.createElement("li");
+        item.textContent = facility;
+        return item;
+      }));
+
+      const today = new Date();
+      dateInput.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+      function updateTotal() {
+        document.querySelector("#booking-total").textContent = money.format(field.price * Number(durationInput.value));
+      }
+
+      durationInput.addEventListener("change", updateTotal);
+      updateTotal();
+
+      bookingForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(bookingForm);
+        const order = {
+          field: field.name,
+          name: formData.get("name"),
+          phone: formData.get("phone"),
+          date: formData.get("date"),
+          time: formData.get("time"),
+          duration: Number(formData.get("duration")),
+          total: field.price * Number(formData.get("duration")),
+          savedAt: new Date().toISOString()
+        };
+        const status = document.querySelector("#booking-status");
+        try {
+          const orders = JSON.parse(localStorage.getItem("diofid-booking-drafts") || "[]");
+          if (!Array.isArray(orders)) throw new Error("Data draf pesanan tidak valid.");
+          orders.push(order);
+          localStorage.setItem("diofid-booking-drafts", JSON.stringify(orders));
+          status.textContent = "Draf pesanan tersimpan di browser ini. Hubungi pengelola untuk mengecek ketersediaan dan konfirmasi.";
+        } catch (error) {
+          status.textContent = `Draf tidak dapat disimpan: ${error.message}`;
+          status.classList.add("booking-error");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
