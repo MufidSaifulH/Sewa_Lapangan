@@ -23,7 +23,7 @@
         booking.customerName,
         booking.customerEmail,
         booking.fieldName,
-        formatDate(booking.date, booking.time),
+        formatDate(booking.date, booking.endTime ? `${booking.time}–${booking.endTime}` : booking.time),
         formatPrice(booking.price)
       ].forEach((value) => {
         const cell = document.createElement("td");

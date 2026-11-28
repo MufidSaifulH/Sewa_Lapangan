@@ -17,6 +17,7 @@
       typeof booking.customerEmail === "string" &&
       typeof booking.date === "string" &&
       typeof booking.time === "string" &&
+      (booking.endTime === undefined || typeof booking.endTime === "string") &&
       Number.isFinite(booking.price) &&
       STATUSES.includes(booking.status) &&
       typeof booking.createdAt === "string"
@@ -24,6 +25,23 @@
       throw new Error("Data pemesanan tidak valid. Periksa penyimpanan browser Anda.");
     }
     return bookings;
+  };
+
+  const parseTime = (time, allowEndOfDay = false) => {
+    const match = /^(\d{2}):(\d{2})$/.exec(time);
+    if (!match) return null;
+    const hours = Number(match[1]);
+    const minutes = Number(match[2]);
+    if (minutes !== 0 || hours > (allowEndOfDay ? 24 : 23) || (hours === 24 && !allowEndOfDay)) {
+      return null;
+    }
+    return hours * 60 + minutes;
+  };
+
+  const getBookingRange = (booking) => {
+    const start = parseTime(booking.time);
+    const end = booking.endTime === undefined ? start + 60 : parseTime(booking.endTime, true);
+    return start !== null && end !== null && end > start ? { start, end } : null;
   };
 
   const getFields = () => {
@@ -35,36 +53,30 @@
   };
 
   const getSlots = (field, date) => {
-    const start = field.openTime.split(":").map(Number);
-    const end = field.closeTime.split(":").map(Number);
-    const startMinutes = start[0] * 60 + start[1];
-    const endMinutes = end[0] * 60 + end[1];
-    if (!Number.isFinite(startMinutes) || !Number.isFinite(endMinutes) || endMinutes <= startMinutes) {
-      return [];
-    }
-
     const bookings = loadBookings();
-    const bookedTimes = new Set(bookings
+    const fieldBookings = bookings
       .filter((booking) => booking.fieldId === field.id && booking.date === date && booking.status !== "cancelled")
-      .map((booking) => booking.time));
+      .map((booking) => getBookingRange(booking))
+      .filter(Boolean);
     const now = new Date();
     const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
     const slots = [];
-    for (let minutes = startMinutes; minutes + 60 <= endMinutes; minutes += 60) {
+    for (let minutes = 0; minutes < 24 * 60; minutes += 60) {
       const time = `${String(Math.floor(minutes / 60)).padStart(2, "0")}:${String(minutes % 60).padStart(2, "0")}`;
       const expired = date === today && minutes <= currentMinutes;
+      const booked = fieldBookings.some((range) => minutes < range.end && minutes + 60 > range.start);
       slots.push({
         time,
-        available: !expired && !bookedTimes.has(time),
-        reason: expired ? "sudah lewat" : bookedTimes.has(time) ? "sudah dipesan" : ""
+        available: !expired && !booked,
+        reason: expired ? "sudah lewat" : booked ? "sudah dipesan" : ""
       });
     }
     return slots;
   };
 
-  const createBooking = ({ fieldId, date, time, customerName, customerEmail }) => {
+  const createBooking = ({ fieldId, date, time, endTime, customerName, customerEmail }) => {
     const fields = getFields();
     const field = fields.find((item) => item.id === fieldId && item.active);
     if (!field) throw new Error("Lapangan tidak tersedia. Silakan muat ulang halaman.");
@@ -78,7 +90,17 @@
     if (!validDate || date < todayString) {
       throw new Error("Pilih tanggal hari ini atau tanggal berikutnya.");
     }
-    if (!getSlots(field, date).some((slot) => slot.time === time && slot.available)) {
+    const startMinutes = parseTime(time);
+    const endMinutes = parseTime(endTime, true);
+    if (startMinutes === null || endMinutes === null || endMinutes <= startMinutes) {
+      throw new Error("Pilih rentang jam yang valid.");
+    }
+    const selectedSlots = getSlots(field, date).filter((slot) => {
+      const slotStart = parseTime(slot.time);
+      return slotStart >= startMinutes && slotStart < endMinutes;
+    });
+    if (selectedSlots.length !== (endMinutes - startMinutes) / 60 ||
+      !selectedSlots.every((slot) => slot.available)) {
       throw new Error("Jam tersebut sudah dipesan atau tidak tersedia. Pilih jam lain.");
     }
 
@@ -90,7 +112,8 @@
       customerEmail,
       date,
       time,
-      price: field.price,
+      endTime,
+      price: field.price * ((endMinutes - startMinutes) / 60),
       status: "pending",
       createdAt: new Date().toISOString()
     };
@@ -106,13 +129,18 @@
     const index = bookings.findIndex((booking) => booking.id === id);
     if (index < 0) throw new Error("Pemesanan tidak ditemukan.");
     const booking = bookings[index];
-    if (status !== "cancelled" && bookings.some((other) =>
-      other.id !== booking.id &&
-      other.fieldId === booking.fieldId &&
-      other.date === booking.date &&
-      other.time === booking.time &&
-      other.status !== "cancelled"
-    )) {
+    const bookingRange = getBookingRange(booking);
+    const hasConflictingBooking = bookings.some((other) => {
+      if (other.id === booking.id || other.fieldId !== booking.fieldId ||
+        other.date !== booking.date || other.status === "cancelled" || !bookingRange) {
+        return false;
+      }
+      const otherRange = getBookingRange(other);
+      return otherRange &&
+        bookingRange.start < otherRange.end &&
+        bookingRange.end > otherRange.start;
+    });
+    if (status !== "cancelled" && hasConflictingBooking) {
       throw new Error("Slot tersebut sudah digunakan pemesanan lain.");
     }
     booking.status = status;

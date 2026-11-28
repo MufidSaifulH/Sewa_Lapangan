@@ -57,13 +57,16 @@
           <label for="booking-date">Tanggal sewa</label>
           <input id="booking-date" name="date" type="date" required>
 
-          <label for="booking-time">Jam tersedia (durasi 1 jam)</label>
+          <label for="booking-time">Jam mulai</label>
           <select id="booking-time" name="time" required></select>
+
+          <label for="booking-end-time">Jam selesai</label>
+          <select id="booking-end-time" name="endTime" required></select>
 
           <button class="book-button" type="submit">Kirim pemesanan</button>
           <p class="booking-form-message" id="booking-message" role="status" aria-live="polite"></p>
         </form>
-        <p class="booking-help">Pemesanan akan berstatus menunggu konfirmasi admin.</p>
+        <p class="booking-help">Pilih jam mulai dan selesai per 1 jam. Jadwal tersedia setiap jam selama 24 jam; jam yang sudah dipesan tidak dapat dipilih. Pemesanan menunggu konfirmasi admin.</p>
       </section>
     </div>
   </main>

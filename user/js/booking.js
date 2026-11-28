@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const dateInput = document.querySelector("#booking-date");
     const timeSelect = document.querySelector("#booking-time");
+    const endTimeSelect = document.querySelector("#booking-end-time");
     const form = document.querySelector("#booking-form");
     const message = document.querySelector("#booking-message");
     const now = new Date();
@@ -38,15 +39,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateTimeOptions = () => {
       try {
         timeSelect.replaceChildren();
+        endTimeSelect.replaceChildren();
         const slots = window.DioFidBookingStore.getSlots(field, dateInput.value);
         const firstAvailable = slots.find((slot) => slot.available);
 
-        if (slots.length === 0) {
-          timeSelect.add(new Option("Tidak ada slot pada jam operasional", ""));
+        if (!firstAvailable) {
+          timeSelect.add(new Option("Tidak ada jam tersedia pada tanggal ini", ""));
           timeSelect.disabled = true;
+          endTimeSelect.add(new Option("Tidak ada jam tersedia", ""));
+          endTimeSelect.disabled = true;
           return;
         }
 
+        timeSelect.add(new Option("Pilih jam mulai", ""));
         slots.forEach((slot) => {
           const option = new Option(
             slot.available ? slot.time : `${slot.time} — ${slot.reason}`,
@@ -55,18 +60,49 @@ document.addEventListener("DOMContentLoaded", () => {
           option.disabled = !slot.available;
           timeSelect.add(option);
         });
-        timeSelect.disabled = !firstAvailable;
-        timeSelect.value = firstAvailable ? firstAvailable.time : "";
+        timeSelect.disabled = false;
+        timeSelect.value = firstAvailable.time;
+        updateEndTimeOptions(slots);
         message.textContent = "";
         message.classList.remove("is-error");
       } catch (error) {
         message.textContent = error.message || "Jadwal tidak dapat dimuat.";
         message.classList.add("is-error");
         timeSelect.disabled = true;
+        endTimeSelect.disabled = true;
       }
     };
 
+    const updateEndTimeOptions = (slots = window.DioFidBookingStore.getSlots(field, dateInput.value)) => {
+      endTimeSelect.replaceChildren();
+      endTimeSelect.add(new Option("Pilih jam selesai", ""));
+      if (!timeSelect.value) {
+        endTimeSelect.disabled = true;
+        return;
+      }
+      const startMinutes = Number(timeSelect.value.split(":")[0]) * 60;
+      let firstAvailableEnd = "";
+      for (let endMinutes = startMinutes + 60; endMinutes <= 24 * 60; endMinutes += 60) {
+        const endTime = endMinutes === 24 * 60
+          ? "24:00"
+          : `${String(Math.floor(endMinutes / 60)).padStart(2, "0")}:00`;
+        const rangeSlots = slots.filter((slot) => {
+          const slotStart = Number(slot.time.split(":")[0]) * 60;
+          return slotStart >= startMinutes && slotStart < endMinutes;
+        });
+        const available = rangeSlots.length === (endMinutes - startMinutes) / 60 &&
+          rangeSlots.every((slot) => slot.available);
+        const option = new Option(available ? endTime : `${endTime} — jam terpakai`, endTime);
+        option.disabled = !available;
+        endTimeSelect.add(option);
+        if (available && !firstAvailableEnd) firstAvailableEnd = endTime;
+      }
+      endTimeSelect.disabled = !firstAvailableEnd;
+      endTimeSelect.value = firstAvailableEnd;
+    };
+
     dateInput.addEventListener("change", updateTimeOptions);
+    timeSelect.addEventListener("change", () => updateEndTimeOptions());
     updateTimeOptions();
 
     form.addEventListener("submit", (event) => {
@@ -83,10 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
           fieldId: field.id,
           date: dateInput.value,
           time: timeSelect.value,
+          endTime: endTimeSelect.value,
           customerName: session.name,
           customerEmail: session.email
         });
-        message.textContent = `Pemesanan ${booking.fieldName} pada ${booking.date}, ${booking.time} berhasil dikirim dan menunggu konfirmasi admin.`;
+        message.textContent = `Pemesanan ${booking.fieldName} pada ${booking.date}, ${booking.time}–${booking.endTime} berhasil dikirim dan menunggu konfirmasi admin.`;
         form.querySelectorAll("input, select, button").forEach((control) => { control.disabled = true; });
       } catch (error) {
         message.textContent = error.message || "Pemesanan tidak dapat disimpan.";
